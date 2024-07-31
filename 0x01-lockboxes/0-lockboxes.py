@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+""" Defines a lockbox algorithim """
+
+
 def canUnlockAll(boxes):
     """
     Determine if all boxes can be opened.
