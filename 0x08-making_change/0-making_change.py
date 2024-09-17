@@ -1,20 +1,24 @@
 #!/usr/bin/python3
-"""0-make_changes"""
-import sys
+
+""" Contains makeChange function"""
 
 
 def makeChange(coins, total):
-    """ Deteremines fewest number of coins needed """
+    """
+    Returns: fewest number of coins needed to meet total
+        If total is 0 or less, return 0
+        If total cannot be met by any number of coins you have, return -1
+    """
+    if not coins or coins is None:
+        return -1
     if total <= 0:
         return 0
-
-    # Initialize the dp array with a large value representing infinity
-    dp = [sys.maxsize] * (total + 1)
-    dp[0] = 0  # 0 coins are needed to make a total of 0
-
-    for i in range(1, total + 1):
-        for coin in coins:
-            if i - coin >= 0:
-                dp[i] = min(dp[i], dp[i - coin] + 1)
-
-    return dp[total] if dp[total] != sys.maxsize else -1
+    change = 0
+    coins = sorted(coins)[::-1]
+    for coin in coins:
+        while coin <= total:
+            total -= coin
+            change += 1
+        if (total == 0):
+            return change
+    return -1
